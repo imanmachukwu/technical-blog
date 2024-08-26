@@ -2,10 +2,16 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { PrismicText, PrismicRichText } from '@prismicio/react'
+import { createClient } from '@/prismicio'
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ page, error }) {
+  if (error) {
+    return <div>Nna eh: an error occurred: {error}</div>
+  }
+
   return (
     <>
       <Head>
@@ -111,4 +117,20 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const client = createClient()
+    const page = await client.getSingle('Index');
+    console.log(page)
+    return {
+      props: { page },
+    }
+  } catch (error) {
+    console.error('Error fetching data from Prismic:', error);
+    return {
+      props: { error: error.message },
+    }
+  }
 }
