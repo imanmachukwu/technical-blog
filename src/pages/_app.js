@@ -11,7 +11,7 @@ function App({ Component, pageProps, navigation, preloader }) {
 
   useEffect(() => {
     // Simulate page load completion
-    const timer = setTimeout(() => setLoading(false), 8000); // Adjust the timing as needed
+    const timer = setTimeout(() => setLoading(false), 20000); // Adjust the timing as needed
     return () => clearTimeout(timer);
   }, []);
 
@@ -49,15 +49,9 @@ App.getInitialProps = async (appContext) => {
   try {
     // Fetching the navigation data
     navigation = await client.getByUID('navigation', 'header');
-    console.log('Navigation fetched successfully:', navigation);
+    console.log('Navigation fetched successfully:', navigation.data.slices);
   } catch (error) {
-    console.error('Error fetching navigation:', error);
-    try {
-      navigation = await client.getSingle('navigation');
-      console.log('Navigation fetched as single type:', navigation);
-    } catch (innerError) {
-      console.error('Error fetching navigation as single type:', innerError);
-    }
+    console.error('Error fetching navigation:', error.code);
   }
 
   try {
@@ -65,7 +59,7 @@ App.getInitialProps = async (appContext) => {
     preloader = await client.getSingle('preloader');
     console.log('Preloader page fetched successfully:', preloader);
   } catch (error) {
-    console.error('Error fetching preloader page:', error);
+    console.error('Error fetching preloader page:', error.code);
   }
 
   const pageProps = appContext.Component.getInitialProps

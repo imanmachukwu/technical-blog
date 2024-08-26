@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #ce1818;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,9 +19,13 @@
     align-items: center;
 }
 
-.image {
-    width: 59.8125rem;
-    height: 36.438rem;
+.image, .image__container > img {
+    width: 64.5975dvw !important;
+    height: auto !important;
     flex-shrink: 0;
     object-fit: cover;
+}
+
+p.image__fallback {
+    color: #000;
 }
