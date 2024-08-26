@@ -119,9 +119,9 @@ export default function Home({ page, error }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ previewData }) {
   try {
-    const client = createClient()
+    const client = createClient({ previewData })
     const page = await client.getSingle('Index');
     console.log(page)
     return {

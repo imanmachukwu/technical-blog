@@ -50,3 +50,16 @@ export const createClient = (config = {}) => {
 
   return client;
 };
+
+export function linkResolver(doc) {
+  switch (doc.type) {
+      case 'Index':
+          return '/'
+      case 'colophon':
+          return '/colophon'
+      case 'project':
+          return `/project/${doc.uid}`
+      default:
+          return null
+  }
+}
