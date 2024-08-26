@@ -6,7 +6,7 @@ const Preloader = ({ page }) => {
     <div className={styles.preloader}>
       <div className={styles.image__container}>
         <PrismicNextImage
-          field={page?.data?.image?.url ?? null}
+          field={page?.data?.image ?? null}
           loader={undefined}
           fallback={<p>Image could not load.</p>}
         />
