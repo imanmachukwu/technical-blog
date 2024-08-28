@@ -4,7 +4,6 @@ const nextConfig = {
   transpilePackages: ["geist"],
   distDir: 'dist',
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
