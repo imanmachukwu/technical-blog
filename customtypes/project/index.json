@@ -85,6 +85,20 @@
           "thumbnails": []
         },
         "type": "Image"
+      },
+      "meta_image_width": {
+        "type": "Number",
+        "config": {
+          "label": "Meta Image Width",
+          "placeholder": ""
+        }
+      },
+      "meta_image_height": {
+        "type": "Number",
+        "config": {
+          "label": "Meta Image Height",
+          "placeholder": ""
+        }
       }
     }
   }

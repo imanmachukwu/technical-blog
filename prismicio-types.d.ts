@@ -62,6 +62,28 @@ interface IndexDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Image Width field in *Index*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: Index.meta_image_width
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_width: prismic.NumberField;
+
+  /**
+   * Meta Image Height field in *Index*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: Index.meta_image_height
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_height: prismic.NumberField;
 }
 
 /**
@@ -134,6 +156,28 @@ interface ColophonDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Image Width field in *Colophon*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: colophon.meta_image_width
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_width: prismic.NumberField;
+
+  /**
+   * Meta Image Height field in *Colophon*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: colophon.meta_image_height
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_height: prismic.NumberField;
 }
 
 /**
@@ -331,6 +375,28 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Image Width field in *Project*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.meta_image_width
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_width: prismic.NumberField;
+
+  /**
+   * Meta Image Height field in *Project*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.meta_image_height
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_height: prismic.NumberField;
 }
 
 /**

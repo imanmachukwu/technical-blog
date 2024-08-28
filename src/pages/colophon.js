@@ -14,6 +14,8 @@ const Colophon = ({ page, error }) => {
         <meta property="og:title" content={page?.data?.meta_title || 'Colophon'} />
         <meta property="og:description" content={page?.data?.meta_description || ''} />
         <meta property="og:image" content={page?.data?.meta_image?.url || ''} />
+        <meta property="og:image:width" content={page?.data?.meta_image?.dimensions?.width || ''} />
+        <meta property="og:image:height" content={page?.data?.meta_image?.dimensions.height || ''} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
