@@ -7,7 +7,7 @@ import { PrismicPreview } from '@prismicio/next';
 import { GeistSans } from "geist/font/sans";
 
 function App({ Component, pageProps, navigation, preloader }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
