@@ -1,22 +1,26 @@
 import "@/styles/globals.css";
 import { useState, useEffect } from 'react';
-import Preloader from './components/Preloader';
-import { createClient, repositoryName, linkResolver } from '@/prismicio';
+import dynamic from 'next/dynamic';
+import { createClient, repositoryName, linkResolver } from '../prismicio';  // Adjust path as needed
 import { PrismicNextLink, PrismicRichText } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
 import { GeistSans } from "geist/font/sans";
 
+// Dynamically import the Preloader component with SSR disabled
+const DynamicPreloader = dynamic(() => import('./components/Preloader'), {
+  ssr: false,
+});
+
 function App({ Component, pageProps, navigation, preloader }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
+    
+    const timer = setTimeout(() => setLoading(false), 5000); // Adjust time as needed
+    return () => clearTimeout(timer);
   }, []);
-
-  const preloaderLoaded = () => {
-    setLoading(false);
-  }
 
   const renderNavigation = () => {
     if (!isClient) return null;
@@ -40,8 +44,8 @@ function App({ Component, pageProps, navigation, preloader }) {
 
   return (
     <>
-      {loading ? (
-        <Preloader page={preloader} onLoadComplete={preloaderLoaded} />
+      {isClient && loading ? (
+        <DynamicPreloader page={preloader} />
       ) : (
         <>
           {renderNavigation()}
