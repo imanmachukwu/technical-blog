@@ -11,7 +11,7 @@ export default function Project({ project }) {
   )
 }
 
-export async function getStaticPaths({ params, previewData }) {
+export async function getServerSideProps({ params, previewData }) {
   const client = createClient({ previewData })
 
   const project = await client.getByUID('project', params.uid)

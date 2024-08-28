@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["geist"],
-  output: 'export',
   distDir: 'dist',
   images: {
     unoptimized: true,
