@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { createClient, repositoryName, linkResolver } from '../prismicio';  // Adjust path as needed
+import { createClient, repositoryName, linkResolver } from '../prismicio'; // Adjust path as needed
 import { PrismicNextLink, PrismicRichText } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
 import { GeistSans } from "geist/font/sans";
@@ -17,14 +17,14 @@ function App({ Component, pageProps, navigation, preloader }) {
 
   useEffect(() => {
     setIsClient(true);
-    
-    const timer = setTimeout(() => setLoading(false), 5000); // Adjust time as needed
-    return () => clearTimeout(timer);
   }, []);
+
+  const onLoadComplete = () => {
+    setLoading(false);
+  };
 
   const renderNavigation = () => {
     if (!isClient) return null;
-
     return (
       <nav>
         <ul>
@@ -45,7 +45,7 @@ function App({ Component, pageProps, navigation, preloader }) {
   return (
     <>
       {isClient && loading ? (
-        <DynamicPreloader page={preloader} />
+        <DynamicPreloader page={preloader} onLoadComplete={onLoadComplete} />
       ) : (
         <>
           {renderNavigation()}
