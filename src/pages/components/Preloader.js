@@ -30,6 +30,7 @@ const Preloader = ({ page, onLoadComplete }) => {
           className={styles.image}
           field={page?.data?.image ?? null}
           priority={true}
+          loader={undefined}
           loading="eager"
           onLoad={handleImageLoad}
           fallback={<p className={styles.image__fallback}>Preloader. Hey, please retry that.</p>}
