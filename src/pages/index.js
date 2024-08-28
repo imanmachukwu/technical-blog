@@ -1,121 +1,35 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { PrismicText, PrismicRichText } from '@prismicio/react'
-import { createClient } from '@/prismicio'
+import { createClient, linkResolver } from '@/prismicio'
+import { PrismicNextLink } from "@prismicio/next";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home({ page, error }) {
-  if (error) {
-    return <div>Nna eh: an error occurred: {error}</div>
-  }
-
+export default function Home({ page, fetchedProjects, error, innerError}) {
   return (
     <>
       <Head>
-        <title>{page.data.meta_title}</title>
-        <meta name="description" content={page.data.meta_description} />
-        <meta property="og:title" content={page.data.meta_title} />
-        <meta property="og:description" content={page.data.meta_description} />
-        <meta property="og:image" content={page.data.meta_image.url} />
+        <title>{page?.data?.meta_title || 'Portfolio'}</title>
+        <meta name="description" content={page?.data?.meta_description || ''} />
+        <meta property="og:title" content={page?.data?.meta_title || 'Portfolio'} />
+        <meta property="og:description" content={page?.data?.meta_description || ''} />
+        <meta property="og:image" content={page?.data?.meta_image?.url || ''} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{" "}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+      <main className={styles.main}>
+        <div className={styles.content__container_parent}>
+          {error ? (
+            <div className={styles.error__container}>Hey, please retry that.</div>
+          ) : (
+            <div className={styles.content__container}>
+              {fetchedProjects.map((project) => {
+                <a href={project.url} className={styles.project} key={project.id} linkResolver={linkResolver}>
+                  <p className={styles.project__year}>{project.data.year}</p>
+                  <h1 className={styles.project__title}>{project.data.title}</h1>
+                  <p className={styles.project__description}>{project.data.description}</p>
+                </a>
+              })}
+            </div>
+          )}
         </div>
       </main>
     </>
@@ -126,12 +40,19 @@ export async function getStaticProps({ previewData }) {
   try {
     const client = createClient({ previewData })
     const page = await client.getSingle('Index');
-    console.log(page)
-    return {
-      props: { page },
+    try {
+      const fetchedProjects = await client.getAllByType('project');
+      return {
+        props: { page, fetchedProjects },
+      }
+    } catch (innerError) {
+      console.error('Error fetching projects from Prismic:', innerError.message);
+      return {
+        props: { innerError: innerError.message },
+      }
     }
   } catch (error) {
-    console.error('Error fetching data from Prismic:', error.code);
+    console.error('Error fetching Index page from Prismic:', error.message);
     return {
       props: { error: error.message },
     }

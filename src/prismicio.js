@@ -60,6 +60,6 @@ export function linkResolver(doc) {
       case 'project':
           return `/project/${doc.uid}`
       default:
-          return null
+          return '/'
   }
 }

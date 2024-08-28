@@ -1,39 +1,54 @@
 import "@/styles/globals.css";
 import { useState, useEffect } from 'react';
 import Preloader from './components/Preloader';
-import { createClient, repositoryName } from '@/prismicio';
+import { createClient, repositoryName, linkResolver } from '@/prismicio';
 import { PrismicNextLink, PrismicRichText } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
-import { linkResolver } from '@/prismicio';
+import { GeistSans } from "geist/font/sans";
 
 function App({ Component, pageProps, navigation, preloader }) {
   const [loading, setLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Simulate page load completion
-    const timer = setTimeout(() => setLoading(false), 20000); // Adjust the timing as needed
-    return () => clearTimeout(timer);
+    setIsClient(true);
   }, []);
+
+  const preloaderLoaded = () => {
+    setLoading(false);
+  }
+
+  const renderNavigation = () => {
+    if (!isClient) return null;
+
+    return (
+      <nav>
+        <ul>
+          {navigation?.data?.slices?.map((slice) => (
+            <li key={slice.id}>
+              {slice.primary?.link && slice.primary?.label && (
+                <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver}>
+                  <PrismicRichText field={slice.primary.label} />
+                </PrismicNextLink>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  };
 
   return (
     <>
       {loading ? (
-        <Preloader page={preloader} />
+        <Preloader page={preloader} onLoadComplete={preloaderLoaded} />
       ) : (
         <>
-          <nav>
-            <ul>
-              {navigation && navigation.data.slices.map((slice) => (
-                <li key={slice.id}>
-                  <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver}>
-                    <PrismicRichText field={slice.primary.label} />
-                  </PrismicNextLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {renderNavigation()}
           <PrismicPreview repositoryName={repositoryName}>
-            <Component {...pageProps} />
+            <main className={GeistSans.className}>
+              <Component {...pageProps} />
+            </main>
           </PrismicPreview>
         </>
       )}
@@ -41,30 +56,31 @@ function App({ Component, pageProps, navigation, preloader }) {
   );
 }
 
-App.getInitialProps = async (appContext) => {
+App.getInitialProps = async ({ Component, ctx }) => {
   const client = createClient();
   let navigation = null;
   let preloader = null;
+  let pageProps = {};
 
   try {
-    // Fetching the navigation data
     navigation = await client.getByUID('navigation', 'header');
-    console.log('Navigation fetched successfully:', navigation.data.slices);
   } catch (error) {
-    console.error('Error fetching navigation:', error.code);
+    console.error('Error fetching navigation:', error);
   }
 
   try {
-    // Fetching the data for the preloader
     preloader = await client.getSingle('preloader');
-    console.log('Preloader page fetched successfully:', preloader);
   } catch (error) {
-    console.error('Error fetching preloader page:', error.code);
+    console.error('Error fetching preloader page:', error);
   }
 
-  const pageProps = appContext.Component.getInitialProps
-    ? await appContext.Component.getInitialProps(appContext.ctx)
-    : {};
+  if (Component.getInitialProps) {
+    try {
+      pageProps = await Component.getInitialProps(ctx);
+    } catch (error) {
+      console.error('Error in Component.getInitialProps:', error);
+    }
+  }
 
   return { pageProps, navigation, preloader };
 };

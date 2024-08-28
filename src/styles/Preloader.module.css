@@ -20,7 +20,7 @@
 }
 
 .image, .image__container > img {
-    width: 64.5975dvw !important;
+    width: 34.5975dvw !important;
     height: auto !important;
     flex-shrink: 0;
     object-fit: cover;
@@ -28,4 +28,13 @@
 
 p.image__fallback {
     color: #000;
+}
+
+@media (max-width: 700px) {
+    .image, .image__container > img {
+        width: 90dvw !important;
+        height: auto !important;
+        flex-shrink: 0;
+        object-fit: cover;
+    } 
 }

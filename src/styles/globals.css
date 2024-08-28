@@ -71,6 +71,9 @@
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
   }
+  html {
+    color-scheme: dark;
+  }
 }
 
 * {
@@ -86,13 +89,7 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #fff;
 }
 
 a {
@@ -100,8 +97,7 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+h1, h2, h3, h4, h5, h6, a, p, div {
+  font-weight: 400 !important;
+  color: #000;
 }

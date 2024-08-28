@@ -3,6 +3,8 @@ import { SliceZone } from "@prismicio/react";
 
 import { components } from "../slices";
 
+console.log(components);
+
 export default function SliceSimulatorPage() {
   return (
     <SliceSimulator
