@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { createClient, linkResolver } from '@/prismicio'
 import { PrismicNextLink } from "@prismicio/next";
+import { PrismicRichText, PrismicText } from "@prismicio/react";
 
 export default function Home({ page, fetchedProjects, error, innerError}) {
   return (
@@ -18,22 +19,35 @@ export default function Home({ page, fetchedProjects, error, innerError}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.content__container_parent}>
-          {error ? (
-            <div className={styles.error__container}>Hey, please retry that.</div>
-          ) : (
-            <div className={styles.content__container}>
-              {fetchedProjects.map((project) => {
-                <a href={project.url} className={styles.project} key={project.id} linkResolver={linkResolver}>
-                  <p className={styles.project__year}>{project.data.year}</p>
-                  <h1 className={styles.project__title}>{project.data.title}</h1>
-                  <p className={styles.project__description}>{project.data.description}</p>
-                </a>
-              })}
+      <div className={styles.content__container_parent}>
+        {error ? (
+          <div className={styles.error__container}>
+            <br />Designer <br />& Developer <br /><br /><br />Please retry that.
+          </div>
+        ) : (
+          <div className={styles.content__container}>
+            {fetchedProjects.map((project) => (
+              <a 
+                href={project.url} 
+                className={styles.project} 
+                key={project.id} 
+                style={{'--bg-image': `url(${project.data.featured_image.url})`}}
+              ><div className={styles.project__content}>
+                <p className={styles.project__year}>
+                  {project.data.year ? project.data.year.toString().slice(0, 4) : ''}
+                </p>
+                <h1 className={styles.project__title}>{project.data.title}</h1>
+                <PrismicRichText 
+                  className={styles.project__description} 
+                  field={project.data.description} 
+                />
             </div>
-          )}
-        </div>
-      </main>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
     </>
   );
 }
@@ -44,6 +58,7 @@ export async function getStaticProps({ previewData }) {
     const page = await client.getSingle('Index');
     try {
       const fetchedProjects = await client.getAllByType('project');
+      console.log(fetchedProjects);
       return {
         props: { page, fetchedProjects },
       }

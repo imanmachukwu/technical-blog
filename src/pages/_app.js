@@ -26,7 +26,8 @@ function App({ Component, pageProps, navigation, preloader }) {
   const renderNavigation = () => {
     if (!isClient) return null;
     return (
-      <nav>
+      <nav className={GeistSans.className}>
+        Imanmachukwu
         <ul>
           {navigation?.data?.slices?.map((slice) => (
             <li key={slice.id}>

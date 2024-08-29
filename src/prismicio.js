@@ -40,6 +40,7 @@ export const createClient = (config = {}) => {
     routes,
     ...config,
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+    timeoutInMs: 30000,
   })
 
   enableAutoPreviews({
