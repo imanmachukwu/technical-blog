@@ -1,6 +1,7 @@
 import * as prismic from "@prismicio/client";
 import { enableAutoPreviews } from '@prismicio/next'
 import config from "../slicemachine.config.json";
+import fetch from 'cross-fetch'
 
 
 export const repositoryName =
@@ -24,10 +25,28 @@ const routes = [
     path: '/colophon',
   },
   {
+    type: 'work',
+    path: '/work',
+  },
+  {
     type: 'project',
     path: '/project/:uid',
   },
 ];
+
+const retryFetch = async (url, options, retries = 3, backoff = 300) => {
+  try {
+    const response = await fetch(url, { ...options, timeout: 30000 })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    return response
+  } catch (error) {
+    if (retries > 0) {
+      await new Promise(resolve => setTimeout(resolve, backoff))
+      return retryFetch(url, options, retries - 1, backoff * 2)
+    }
+    throw error
+  }
+}
 
 /**
  * Creates a Prismic client for the project's repository. The client is used to
@@ -40,7 +59,18 @@ export const createClient = (config = {}) => {
     routes,
     ...config,
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-    timeoutInMs: 30000,
+    fetch: async (url, options) => {
+      //console.time(`Prismic request to ${url}`)
+      try {
+        const response = await retryFetch(url, options)
+        //console.timeEnd(`Prismic request to ${url}`)
+        return response
+      } catch (error) {
+        //console.timeEnd(`Prismic request to ${url}`)
+        console.error(`Error fetching from Prismic: ${error}`)
+        throw error
+      }
+    },
   })
 
   enableAutoPreviews({
@@ -58,6 +88,8 @@ export function linkResolver(doc) {
           return '/'
       case 'colophon':
           return '/colophon'
+      case 'work':
+          return '/work'
       case 'project':
           return `/project/${doc.uid}`
       default:

@@ -42,20 +42,24 @@ function App({ Component, pageProps, navigation, error }) {
 
 export async function getStaticProps() {
   const client = createClient();
-  let navigation = null;
 
   try {
-    navigation = await client.getByUID('navigation', 'header');
+    const navigation = await client.getByUID('navigation', 'header');
+    console.log(navigation);
+    return {
+      props:{
+        navigation
+      },
+      revalidate: 1,
+    }
   } catch (error) {
     console.error('Error fetching navigation:', error);
+    return {
+      props: {
+        error,
+      }
+    }
   }
-
-  return {
-    props: {
-      navigation,
-    },
-    revalidate: 60 * 60, // Revalidate every hour
-  };
 }
 
 export default App;

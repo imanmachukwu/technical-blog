@@ -1,5 +1,6 @@
 import Head from "next/head";
-import { createClient } from '@/prismicio'; // Make sure this import is correct
+import { createClient } from '@/prismicio';
+import { PrismicRichText } from "@prismicio/react"; // Make sure this import is correct
 
 const Colophon = ({ page, error }) => {
   if (error) {
@@ -19,7 +20,9 @@ const Colophon = ({ page, error }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>ColophonTitle</div>
+      <main>
+        <PrismicRichText field={page?.data?.text} />
+      </main>
     </>
   )
 }

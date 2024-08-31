@@ -25,8 +25,8 @@ export default function Home({ page, error}) {
         </main>
       ) : (
         <main>
-            <span className={styles.normal_title}>Just here</span>
-            <span className={styles.italic_title}>making really cool stuff</span>
+            <span className={styles.normal_title}>{page?.data?.title_normal}</span>
+            <span className={styles.italic_title}>{page?.data?.title_italics}</span>
         </main>
       )}
     </>
@@ -37,11 +37,12 @@ export async function getStaticProps({ previewData }) {
   try {
     const client = createClient({ previewData })
     const page = await client.getSingle('Index');
+    console.log("Page from Index:", page)
     return {
       props: page
     }
   } catch (error) {
-    console.error('Error fetching Index page from Prismic:', error.message);
+    //console.error('Error fetching Index page from Prismic:', error);
     return {
       props: { error: error.message },
     }
