@@ -5,7 +5,7 @@ export default function Project({ project }) {
   return (
     <div>
       <h1>
-        <PrismicText field={project.data.title} />
+      {project.data.title}
       </h1>
     </div>
   )

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"pages/_app.js -> ./components/Preloader\":{\"id\":\"pages/_app.js -> ./components/Preloader\",\"files\":[\"static/chunks/src_pages_components_Preloader_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST="{}"

@@ -11,15 +11,26 @@ type IndexDocumentDataSlicesSlice = never;
  */
 interface IndexDocumentData {
   /**
-   * title_test field in *Index*
+   * title_normal field in *Index*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: Index.title_test
+   * - **API ID Path**: Index.title_normal
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title_test: prismic.RichTextField;
+  title_normal: prismic.KeyTextField;
+
+  /**
+   * title_italics field in *Index*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: Index.title_italics
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_italics: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Index*
@@ -98,6 +109,126 @@ interface IndexDocumentData {
 export type IndexDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<IndexDocumentData>, "Index", Lang>;
 
+type BlogpostDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Blogpost documents
+ */
+interface BlogpostDocumentData {
+  /**
+   * title field in *Blogpost*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * date field in *Blogpost*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  date: prismic.NumberField;
+
+  /**
+   * blog field in *Blogpost*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.blog
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  blog: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Blogpost*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<BlogpostDocumentDataSlicesSlice> /**
+   * Meta Title field in *Blogpost*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: blogpost.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Blogpost*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: blogpost.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Blogpost*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Image Width field in *Blogpost*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.meta_image_width
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_width: prismic.NumberField;
+
+  /**
+   * Meta Image Height field in *Blogpost*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.meta_image_height
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  meta_image_height: prismic.NumberField;
+}
+
+/**
+ * Blogpost document from Prismic
+ *
+ * - **API ID**: `blogpost`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type BlogpostDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<BlogpostDocumentData>,
+    "blogpost",
+    Lang
+  >;
+
 type ColophonDocumentDataSlicesSlice = never;
 
 /**
@@ -105,15 +236,15 @@ type ColophonDocumentDataSlicesSlice = never;
  */
 interface ColophonDocumentData {
   /**
-   * title_test field in *Colophon*
+   * text field in *Colophon*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: colophon.title_test
+   * - **API ID Path**: colophon.text
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  title_test: prismic.RichTextField;
+  text: prismic.RichTextField;
 
   /**
    * Slice Zone field in *Colophon*
@@ -255,6 +386,17 @@ interface PreloaderDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * text field in *Preloader*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: preloader.text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
 }
 
 /**
@@ -280,17 +422,6 @@ type ProjectDocumentDataSlicesSlice = never;
  */
 interface ProjectDocumentData {
   /**
-   * year field in *Project*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.year
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  year: prismic.DateField;
-
-  /**
    * title field in *Project*
    *
    * - **Field Type**: Text
@@ -300,17 +431,6 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
-
-  /**
-   * description field in *Project*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
 
   /**
    * featured_image field in *Project*
@@ -333,6 +453,17 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   documentation: prismic.RichTextField;
+
+  /**
+   * type field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Project
+   * - **API ID Path**: project.type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  type: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Project*
@@ -417,6 +548,7 @@ export type ProjectDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | IndexDocument
+  | BlogpostDocument
   | ColophonDocument
   | NavigationDocument
   | PreloaderDocument
@@ -490,6 +622,9 @@ declare module "@prismicio/client" {
       IndexDocument,
       IndexDocumentData,
       IndexDocumentDataSlicesSlice,
+      BlogpostDocument,
+      BlogpostDocumentData,
+      BlogpostDocumentDataSlicesSlice,
       ColophonDocument,
       ColophonDocumentData,
       ColophonDocumentDataSlicesSlice,

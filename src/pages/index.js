@@ -1,10 +1,9 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { createClient, linkResolver } from '@/prismicio'
-import { PrismicNextLink } from "@prismicio/next";
-import { PrismicRichText, PrismicText } from "@prismicio/react";
+import { createClient } from '@/prismicio'
+import { useEffect } from "react";
 
-export default function Home({ page, fetchedProjects, error, innerError}) {
+export default function Home({ page, error}) {
   return (
     <>
       <Head>
@@ -18,36 +17,18 @@ export default function Home({ page, fetchedProjects, error, innerError}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-      <div className={styles.content__container_parent}>
-        {error ? (
-          <div className={styles.error__container}>
-            <br />Designer <br />& Developer <br /><br /><br />Please retry that.
-          </div>
-        ) : (
-          <div className={styles.content__container}>
-            {fetchedProjects.map((project) => (
-              <a 
-                href={project.url} 
-                className={styles.project} 
-                key={project.id} 
-                style={{'--bg-image': `url(${project.data.featured_image.url})`}}
-              ><div className={styles.project__content}>
-                <p className={styles.project__year}>
-                  {project.data.year ? project.data.year.toString().slice(0, 4) : ''}
-                </p>
-                <h1 className={styles.project__title}>{project.data.title}</h1>
-                <PrismicRichText 
-                  className={styles.project__description} 
-                  field={project.data.description} 
-                />
-            </div>
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    </main>
+      {error ? (
+        <main>
+          <span className={styles.text}>Error</span>
+          <span className={styles.text}>Error</span>
+          <span className={styles.text}>Refresh?</span>
+        </main>
+      ) : (
+        <main>
+            <span className={styles.normal_title}>Just here</span>
+            <span className={styles.italic_title}>making really cool stuff</span>
+        </main>
+      )}
     </>
   );
 }
@@ -56,17 +37,8 @@ export async function getStaticProps({ previewData }) {
   try {
     const client = createClient({ previewData })
     const page = await client.getSingle('Index');
-    try {
-      const fetchedProjects = await client.getAllByType('project');
-      console.log(fetchedProjects);
-      return {
-        props: { page, fetchedProjects },
-      }
-    } catch (innerError) {
-      console.error('Error fetching projects from Prismic:', innerError.message);
-      return {
-        props: { innerError: innerError.message },
-      }
+    return {
+      props: page
     }
   } catch (error) {
     console.error('Error fetching Index page from Prismic:', error.message);

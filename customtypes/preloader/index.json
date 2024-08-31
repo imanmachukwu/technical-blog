@@ -13,6 +13,13 @@
           "constraint": {},
           "thumbnails": []
         }
+      },
+      "text": {
+        "type": "Text",
+        "config": {
+          "label": "text",
+          "placeholder": ""
+        }
       }
     }
   }

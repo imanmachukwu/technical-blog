@@ -6,11 +6,10 @@
   "status": true,
   "json": {
     "Main": {
-      "year": {
-        "type": "Date",
+      "uid": {
+        "type": "UID",
         "config": {
-          "label": "year",
-          "placeholder": ""
+          "label": "UID"
         }
       },
       "title": {
@@ -18,21 +17,6 @@
         "config": {
           "label": "title",
           "placeholder": ""
-        }
-      },
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "UID"
-        }
-      },
-      "description": {
-        "type": "StructuredText",
-        "config": {
-          "label": "description",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
       "featured_image": {
@@ -50,6 +34,13 @@
           "placeholder": "",
           "allowTargetBlank": true,
           "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "type": {
+        "type": "Text",
+        "config": {
+          "label": "type",
+          "placeholder": "Project"
         }
       },
       "slices": {
