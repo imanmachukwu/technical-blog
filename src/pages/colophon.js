@@ -1,10 +1,15 @@
 import Head from "next/head";
+import styles from "@/styles/Colophon.module.css";
 import { createClient } from '@/prismicio';
 import { PrismicRichText } from "@prismicio/react"; // Make sure this import is correct
 
 const Colophon = ({ page, error }) => {
   if (error) {
-    return <div>Error: {error}</div>;
+    return <main>
+    <span className={styles.text}>Error</span>
+    <span className={styles.text}>Error</span>
+    <span className={styles.text}>Refresh?</span>
+  </main>;
   }
 
   return (
