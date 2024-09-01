@@ -53,3 +53,18 @@
     grid-row: 2 / span 1;
   }
 }
+
+@media (max-width: 768px) {
+  main:has(.text){
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .text {
+    align-self: center !important;
+    font-size: var(--mobile_title-size);
+  }
+}
