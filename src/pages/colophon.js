@@ -26,7 +26,9 @@ const Colophon = ({ page, error }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <div className={styles.content_container}>
         <PrismicRichText field={page?.data?.text} />
+        </div>
       </main>
     </>
   )

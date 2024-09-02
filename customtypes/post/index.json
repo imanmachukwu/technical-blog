@@ -1,0 +1,56 @@
+{
+  "format": "custom",
+  "id": "post",
+  "label": "post",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "type": {
+        "type": "Select",
+        "config": {
+          "label": "type",
+          "placeholder": "",
+          "options": ["1", "2"]
+        }
+      },
+      "link": {
+        "type": "Link",
+        "config": {
+          "label": "link",
+          "placeholder": "",
+          "select": null
+        }
+      },
+      "media": {
+        "type": "Image",
+        "config": {
+          "label": "media",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "title",
+          "placeholder": ""
+        }
+      },
+      "ratio": {
+        "type": "Select",
+        "config": {
+          "label": "ratio",
+          "placeholder": "",
+          "options": ["1", "2"]
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { createClient, repositoryName, linkResolver } from '../prismicio'; // Ad
 import { PrismicLink, PrismicRichText } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
 
-function App({ Component, pageProps, navigation, error }) {
+function App({ Component, pageProps, navigation }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function App({ Component, pageProps, navigation, error }) {
         <ul>
           {navigation?.data?.slices?.map((slice) => (
             <li key={slice.id}>
-              {slice.primary?.link && slice.primary?.label && (
+              {slice?.primary?.link && slice?.primary?.label && (
                 <PrismicLink field={slice.primary.link} linkResolver={linkResolver}>
                   <PrismicRichText field={slice.primary.label} />
                 </PrismicLink>
@@ -40,24 +40,18 @@ function App({ Component, pageProps, navigation, error }) {
   );
 }
 
-export async function getStaticProps() {
-  const client = createClient();
-
+App.getInitialProps = async ({previewData}) => {
   try {
+    const client = createClient({previewData});
     const navigation = await client.getByUID('navigation', 'header');
-    console.log(navigation);
+    console.log("Drawn navigation:", navigation.data.slices);
     return {
-      props:{
-        navigation
-      },
-      revalidate: 1,
+      props: { navigation }
     }
   } catch (error) {
     console.error('Error fetching navigation:', error);
     return {
-      props: {
-        error,
-      }
+      props: { error: error.message || 'An error occurred while fetching data' }
     }
   }
 }

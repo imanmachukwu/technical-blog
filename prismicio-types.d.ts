@@ -373,6 +373,78 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 /**
+ * Content for post documents
+ */
+interface PostDocumentData {
+  /**
+   * type field in *post*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  type: prismic.SelectField<"1" | "2">;
+
+  /**
+   * link field in *post*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * media field in *post*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.media
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  media: prismic.ImageField<never>;
+
+  /**
+   * title field in *post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * ratio field in *post*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.ratio
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  ratio: prismic.SelectField<"1" | "2">;
+}
+
+/**
+ * post document from Prismic
+ *
+ * - **API ID**: `post`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PostDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<PostDocumentData>, "post", Lang>;
+
+/**
  * Content for Preloader documents
  */
 interface PreloaderDocumentData {
@@ -634,6 +706,7 @@ export type AllDocumentTypes =
   | BlogpostDocument
   | ColophonDocument
   | NavigationDocument
+  | PostDocument
   | PreloaderDocument
   | ProjectDocument
   | WorkDocument;
@@ -715,6 +788,8 @@ declare module "@prismicio/client" {
       NavigationDocument,
       NavigationDocumentData,
       NavigationDocumentDataSlicesSlice,
+      PostDocument,
+      PostDocumentData,
       PreloaderDocument,
       PreloaderDocumentData,
       ProjectDocument,

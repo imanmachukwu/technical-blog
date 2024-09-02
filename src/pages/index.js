@@ -3,7 +3,15 @@ import styles from "@/styles/Home.module.css";
 import { createClient } from '@/prismicio'
 import { useEffect } from "react";
 
-export default function Home({ page, error}) {
+const Home = ({ page, error}) => {
+  if (error) {
+    return <main>
+    <span className={styles.text}>Error</span>
+    <span className={styles.text}>Error</span>
+    <span className={styles.text}>Refresh?</span>
+  </main>;
+  }
+
   return (
     <>
       <Head>
@@ -17,18 +25,10 @@ export default function Home({ page, error}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {error ? (
-        <main>
-          <span className={styles.text}>Error</span>
-          <span className={styles.text}>Error</span>
-          <span className={styles.text}>Refresh?</span>
-        </main>
-      ) : (
-        <main>
-            <span className={styles.normal_title}>{page?.data?.title_normal}</span>
-            <span className={styles.italic_title}>{page?.data?.title_italics}</span>
-        </main>
-      )}
+      <main>
+          <span className={styles.normal_title}>{page?.data?.title_normal}</span>
+          <span className={styles.italic_title}>{page?.data?.title_italics}</span>
+      </main>
     </>
   );
 }
@@ -37,9 +37,9 @@ export async function getStaticProps({ previewData }) {
   try {
     const client = createClient({ previewData })
     const page = await client.getSingle('Index');
-    console.log("Page from Index:", page)
+    //console.log("Page from Index:", page)
     return {
-      props: page
+      props: { page }
     }
   } catch (error) {
     //console.error('Error fetching Index page from Prismic:', error);
@@ -48,3 +48,5 @@ export async function getStaticProps({ previewData }) {
     }
   }
 }
+
+export default Home;
