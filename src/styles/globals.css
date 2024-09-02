@@ -64,8 +64,6 @@ h1, h2, h3, h4, h5, h6, a, p, div, nav, button {
   color: var(--text-colour);
   font-family: 'LT Remark', sans-serif;
   font-weight: 400;
-  leading-trim: both;
-  text-edge: cap;
   font-size: 3rem;                  
 }
 

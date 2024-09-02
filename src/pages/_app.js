@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { useState, useEffect } from 'react';
 import { createClient, repositoryName, linkResolver } from '../prismicio'; // Adjust path as needed
-import { PrismicLink, PrismicRichText } from '@prismicio/react';
+import { PrismicNextLink, PrismicRichText } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
 
 function App({ Component, pageProps, navigation }) {
@@ -19,9 +19,9 @@ function App({ Component, pageProps, navigation }) {
           {navigation?.data?.slices?.map((slice) => (
             <li key={slice.id}>
               {slice?.primary?.link && slice?.primary?.label && (
-                <PrismicLink field={slice.primary.link} linkResolver={linkResolver}>
+                <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver}>
                   <PrismicRichText field={slice.primary.label} />
-                </PrismicLink>
+                </PrismicNextLink>
               )}
             </li>
           ))}
