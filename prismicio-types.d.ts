@@ -381,11 +381,18 @@ interface PostDocumentData {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
+   * - **Default Value**: Prototype
    * - **API ID Path**: post.type
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  type: prismic.SelectField<"1" | "2">;
+  type: prismic.SelectField<
+    | "Prototype"
+    | "Good craftsmanship I've come across"
+    | "Good craftsman I've come across"
+    | "Visual Electric Explorations",
+    "filled"
+  >;
 
   /**
    * link field in *post*
@@ -425,11 +432,15 @@ interface PostDocumentData {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
+   * - **Default Value**: Square (1:1)
    * - **API ID Path**: post.ratio
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  ratio: prismic.SelectField<"1" | "2">;
+  ratio: prismic.SelectField<
+    "Square (1:1)" | "Landscape (16:9)" | "Elongated (3:5)" | "3:4",
+    "filled"
+  >;
 }
 
 /**
@@ -618,12 +629,38 @@ export type ProjectDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *work → works*
+ */
+export interface WorkDocumentDataWorksItem {
+  /**
+   * link field in *work → works*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: work.works[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
 type WorkDocumentDataSlicesSlice = never;
 
 /**
  * Content for work documents
  */
 interface WorkDocumentData {
+  /**
+   * works field in *work*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: work.works[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  works: prismic.GroupField<Simplify<WorkDocumentDataWorksItem>>;
+
   /**
    * Slice Zone field in *work*
    *
@@ -797,6 +834,7 @@ declare module "@prismicio/client" {
       ProjectDocumentDataSlicesSlice,
       WorkDocument,
       WorkDocumentData,
+      WorkDocumentDataWorksItem,
       WorkDocumentDataSlicesSlice,
       AllDocumentTypes,
       NavigationItemSlice,

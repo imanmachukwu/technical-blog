@@ -17,7 +17,13 @@
         "config": {
           "label": "type",
           "placeholder": "",
-          "options": ["1", "2"]
+          "options": [
+            "Prototype",
+            "Good craftsmanship I've come across",
+            "Good craftsman I've come across",
+            "Visual Electric Explorations"
+          ],
+          "default_value": "Prototype"
         }
       },
       "link": {
@@ -48,7 +54,13 @@
         "config": {
           "label": "ratio",
           "placeholder": "",
-          "options": ["1", "2"]
+          "options": [
+            "Square (1:1)",
+            "Landscape (16:9)",
+            "Elongated (3:5)",
+            "3:4"
+          ],
+          "default_value": "Square (1:1)"
         }
       }
     }

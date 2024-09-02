@@ -44,3 +44,50 @@
       font-size: var(--mobile_title-size);
     }
   }
+
+main.main::before {
+    content: "";
+    grid-column: 1 / 13;
+    grid-row: 1 / 2;
+    min-height: 10vh;
+    display: block;
+}
+
+main.main {
+  padding-bottom: 3rem;
+  overflow-y: scroll;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.work {
+    grid-column: span 4;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem;
+    border-radius: 1.125rem;
+    background: #FFF;
+    aspect-ratio: var(--aspect-ratio);
+}
+
+.meta_text {
+    grid-column: 1 / span 2;
+    font-size: var(--text_body-size);
+    font-style: normal;
+    line-height: normal;
+}
+
+.work > a {
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    justify-self: flex-end;
+    grid-column: 3 / 4;
+}
+
+.work_title {
+    grid-row: 2 / span 2;
+    align-self: flex-end;
+    grid-column: span 3;
+}

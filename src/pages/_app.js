@@ -16,8 +16,8 @@ function App({ Component, pageProps, navigation }) {
     return (
       <nav>
         <ul>
-          {navigation?.data?.slices?.map((slice) => (
-            <li key={slice.id}>
+          {navigation?.data?.slices?.map((slice, index) => (
+            <li key={index}>
               {slice?.primary?.link && slice?.primary?.label && (
                 <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver}>
                   <PrismicRichText field={slice.primary.label} />
@@ -44,7 +44,7 @@ App.getInitialProps = async ({previewData}) => {
   try {
     const client = createClient({previewData});
     const navigation = await client.getByUID('navigation', 'header');
-    console.log("Drawn navigation:", navigation.data.slices);
+    //console.log("Drawn navigation:", navigation.data.slices);
     return {
       props: { navigation }
     }

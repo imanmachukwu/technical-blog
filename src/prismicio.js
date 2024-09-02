@@ -32,6 +32,10 @@ const routes = [
     type: 'project',
     path: '/project/:uid',
   },
+  {
+    type: 'blogpost',
+    path: '/blog/:uid',
+  },
 ];
 
 const retryFetch = async (url, options, retries = 3, backoff = 300) => {
@@ -92,6 +96,8 @@ export function linkResolver(doc) {
           return '/work'
       case 'project':
           return `/project/${doc.uid}`
+      case 'blog':
+          return `/blog/${doc.uid}`
       default:
           return '/'
   }

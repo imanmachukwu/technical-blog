@@ -6,6 +6,23 @@
   "status": true,
   "json": {
     "Main": {
+      "works": {
+        "type": "Group",
+        "config": {
+          "label": "works",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "link",
+                "placeholder": "",
+                "select": null
+              }
+            }
+          }
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
