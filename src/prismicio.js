@@ -59,7 +59,7 @@ const retryFetch = async (url, options, retries = 3, backoff = 300) => {
  * @param {prismicNext.CreateClientConfig} config - Configuration for the Prismic client.
  */
 export const createClient = (config = {}) => {
-  const client = prismic.createClient(process.env.PRISMIC_REPOSITORY_NAME, {
+  const client = prismic.createClient(repositoryName, {
     routes,
     ...config,
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,

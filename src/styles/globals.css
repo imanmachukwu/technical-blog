@@ -104,6 +104,10 @@ nav li {
   cursor: pointer;
 }
 
+nav li a p {
+  font-size: var(--text_body-size);
+}
+
 nav li {
   background: var(--off-white);
 }
