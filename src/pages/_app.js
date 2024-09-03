@@ -4,16 +4,27 @@ import { createClient, repositoryName, linkResolver } from '../prismicio'; // Ad
 import { PrismicRichText } from '@prismicio/react';
 import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
 
-function App({ Component, pageProps, navigation }) {
-  const [isClient, setIsClient] = useState(false);
+function App({ Component, pageProps }) {
+  const [navigation, setNavigation] = useState(null);
+  console.log("nav not yet fetched")
 
   useEffect(() => {
-    setIsClient(true);
+    console.log("nav fetching")
+    async function fetchNavigation() {
+      try {
+        const client = createClient();
+        const nav = await client.getByUID('navigation', 'header');
+        console.log("nav is:", nav)
+        setNavigation(nav);
+      } catch (error) {
+        console.error('Error fetching navigation:', error);
+      }
+    }
+    fetchNavigation();
   }, []);
 
-  const renderNavigation = () => {
-    if (!isClient) return null;
-    return (
+  return (
+    <>
       <nav>
         <ul>
           {navigation?.data?.slices?.map((slice, index) => (
@@ -27,33 +38,11 @@ function App({ Component, pageProps, navigation }) {
           ))}
         </ul>
       </nav>
-    );
-  };
-
-  return (
-    <>
-      {renderNavigation()}
       <PrismicPreview repositoryName={repositoryName}>
         <Component {...pageProps} />
       </PrismicPreview>
     </>
   );
-}
-
-App.getInitialProps = async ({previewData}) => {
-  try {
-    const client = createClient({previewData});
-    const navigation = await client.getByUID('navigation', 'header');
-    //console.log("Drawn navigation:", navigation.data.slices);
-    return {
-      props: { navigation }
-    }
-  } catch (error) {
-    console.error('Error fetching navigation:', error);
-    return {
-      props: { error: error.message || 'An error occurred while fetching data' }
-    }
-  }
 }
 
 export default App;
