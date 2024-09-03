@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import { useState, useEffect } from 'react';
 import { createClient, repositoryName, linkResolver } from '../prismicio'; // Adjust path as needed
-import { PrismicNextLink, PrismicRichText } from '@prismicio/react';
-import { PrismicPreview } from '@prismicio/next';
+import { PrismicRichText } from '@prismicio/react';
+import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
 
 function App({ Component, pageProps, navigation }) {
   const [isClient, setIsClient] = useState(false);
