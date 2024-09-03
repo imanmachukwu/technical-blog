@@ -100,16 +100,17 @@ nav li {
   align-items: center;
   gap: 0.579vw;
   border-radius: 2.375rem;
-  box-shadow: var(--shadow);
   cursor: pointer;
 }
 
 nav li a p {
   font-size: var(--text_body-size);
+  cursor: pointer;
 }
 
-nav li {
+nav li:nth-of-type(1) {
   background: var(--off-white);
+  box-shadow: var(--shadow);
 }
 
 main {

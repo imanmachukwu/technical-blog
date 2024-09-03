@@ -28,15 +28,17 @@ function App({ Component, pageProps }) {
   return (
     <>
       <nav>
-          {navigation?.data?.slices?.map((slice, index) => (
-            <li key={index}>
-              {slice?.primary?.link && slice?.primary?.label && (
-                <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver} >
-                  <PrismicRichText field={slice.primary.label} />
-                </PrismicNextLink>
-              )}
-            </li>
-          ))}
+          <ul>
+            {navigation?.data?.slices?.map((slice, index) => (
+              <li key={index}>
+                {slice?.primary?.link && slice?.primary?.label && (
+                  <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver} >
+                    <PrismicRichText field={slice.primary.label} />
+                  </PrismicNextLink>
+                )}
+              </li>
+            ))}
+          </ul>
       </nav>
       <PrismicPreview repositoryName={repositoryName}>
         <Component {...pageProps} />
