@@ -19,7 +19,7 @@
   --mobile-spacing: 0.5rem;
 
   --text_title-size: 4rem;
-  --text_body-size: 1.25rem;
+  --text_body-size: 1rem;
   --mobile_title-size: 2.5rem;
   --mobile_body-size: 0.875rem;
 
@@ -83,7 +83,7 @@ nav {
 nav ul {
   width: fit-content;
   display: inline-flex;
-  padding: 0.926vw;
+  padding: 0.427rem;
   align-items: flex-start;
   gap: var(--spacing);
   border-radius: 3.375rem;
@@ -95,7 +95,7 @@ nav ul {
 
 nav li {
   display: flex;
-  padding: 1.389vw 1.852vw;
+  padding: 0.854rem 1.5367rem;
   justify-content: center;
   align-items: center;
   gap: 0.579vw;
@@ -108,7 +108,11 @@ nav li a p {
   cursor: pointer;
 }
 
-nav li:nth-of-type(1) {
+nav > p {
+  font-size: var(--text_body-size);
+}
+
+nav li:has(a.selected) {
   background: var(--off-white);
   box-shadow: var(--shadow);
 }

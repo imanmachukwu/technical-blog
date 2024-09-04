@@ -3,7 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/work": "pages/work.js",
-  "/blog/[uid]": "pages/blog/[uid].js",
   "/colophon": "pages/colophon.js",
-  "/api/navigation": "pages/api/navigation.js"
+  "/": "pages/index.js"
 }

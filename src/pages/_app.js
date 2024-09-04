@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { createClient, repositoryName, linkResolver } from '@/prismicio'; // Adjust path as needed
 import { PrismicRichText } from '@prismicio/react';
@@ -7,6 +8,7 @@ import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
 function App({ Component, pageProps }) {
   const [navigation, setNavigation] = useState(null);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchNavigation = async () => {
@@ -25,6 +27,14 @@ function App({ Component, pageProps }) {
     fetchNavigation();
   }, []);
 
+  if (error) {
+    return (
+      <nav>
+        <p>Error fetching menu</p>
+      </nav>
+    )
+  }
+
   return (
     <>
       <nav>
@@ -32,7 +42,7 @@ function App({ Component, pageProps }) {
             {navigation?.data?.slices?.map((slice, index) => (
               <li key={index}>
                 {slice?.primary?.link && slice?.primary?.label && (
-                  <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver} >
+                  <PrismicNextLink field={slice.primary.link} linkResolver={linkResolver} className={router.asPath === slice.primary.link.url ? 'selected' : ''}>
                     <PrismicRichText field={slice.primary.label} />
                   </PrismicNextLink>
                 )}
@@ -40,7 +50,7 @@ function App({ Component, pageProps }) {
             ))}
           </ul>
       </nav>
-      <PrismicPreview repositoryName={repositoryName}>
+      <PrismicPreview repositoryName="imanma">
         <Component {...pageProps} />
       </PrismicPreview>
     </>
