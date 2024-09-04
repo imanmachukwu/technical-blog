@@ -67,7 +67,7 @@ const WorkItem = ({ work, client }) => {
       );
     case 'project':
       return (
-        <div className={styles.work} style={{ '--aspect-ratio': 3 / 4, backgroundColor: 'black'  }}>
+        <div className={styles.work} style={{ '--aspect-ratio': 1 / 1, backgroundColor: '#d3d3d3'  }}>
           <p className={styles.meta_text} style={{color: 'white'}}>Project</p>
           <PrismicNextLink field={work?.link}>
             <svg width="36" height="13" viewBox="0 0 36 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,7 +80,7 @@ const WorkItem = ({ work, client }) => {
       );
     case 'post':
       return (
-        <div className={styles.work} style={{ '--aspect-ratio': linkedData.data.ratio || 2 / 3, backgroundColor: 'black'  }}>
+        <div className={styles.work} style={{ '--aspect-ratio': linkedData.data.ratio || 1 / 1, backgroundColor: '#d3d3d3'  }}>
           <p className={styles.meta_text} style={{color: 'white'}}>{linkedData.data.type || 'Post'}</p>
           {linkedData.data.media && <img src={linkedData.data.media.url} alt={linkedData.data.title} />}
           <h1 className={styles.work_title} style={{color: 'white'}}>{linkedData.data.title}</h1>
