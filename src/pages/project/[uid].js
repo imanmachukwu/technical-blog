@@ -1,7 +1,7 @@
 import { createClient } from '@/prismicio'
 import styles from '@/styles/Project.module.css'
 //import { PrismicNextLink } from '@prismicio/next'
-import { PrismicRichText } from '@prismicio/next'
+import { PrismicRichText, PrismicNextImage } from '@prismicio/next'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -27,6 +27,7 @@ export default function Project({ project, error }) {
         <link rel="icon" href="/favicon.ico" />
     </Head>
     <main>
+      <PrismicNextImage field={project.data.featured_image} className={styles.featured_image}/>
       <Link href="/work" className={styles.back_button}>Back</Link>
       <h1 className={styles.title}>
       {project.data.title}
