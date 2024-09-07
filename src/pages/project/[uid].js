@@ -1,4 +1,5 @@
 import { createClient } from '@/prismicio'
+import styles from '@/styles/Project.module.css'
 import { PrismicText } from '@prismicio/react'
 
 export default function Project({ project }) {

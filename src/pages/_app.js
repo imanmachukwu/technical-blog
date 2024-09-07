@@ -30,7 +30,7 @@ function App({ Component, pageProps }) {
   if (error) {
     return (
       <nav>
-        <p>Error fetching menu</p>
+        <p>Error fetching menu. Please refetch.</p>
       </nav>
     )
   }
