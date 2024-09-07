@@ -127,3 +127,18 @@ main {
   grid-template-rows: repeat(6, 1fr);
   gap: var(--spacing);
 }
+
+@media (max-width: 768px) {
+  :root {
+    --grid-spacing: 1rem;
+    --spacing: 1rem;
+    --text_title-size: 2.5rem;
+    --text_body-size: 0.875rem;
+  }
+  h1, h2, h3, h4, h5, h6, a, p, div, nav, button {
+    font-size: var(--text_title-size);
+  }
+  main {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}

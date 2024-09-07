@@ -80,7 +80,7 @@ const WorkItem = ({ work, client }) => {
       );
     case 'post':
       return (
-        <div className={styles.work} style={{ '--aspect-ratio': linkedData.data.ratio || 1 / 1, backgroundColor: '#d3d3d3'  }}>
+        <div className={styles.work} style={{ '--aspect-ratio': /* linkedData.data.ratio || */ 16 / 9, backgroundColor: '#d3d3d3'  }}>
           <p className={styles.meta_text} style={{color: 'white'}}>{linkedData.data.type || 'Post'}</p>
           {linkedData.data.media && <img src={linkedData.data.media.url} alt={linkedData.data.title} />}
           <h1 className={styles.work_title} style={{color: 'white'}}>{linkedData.data.title}</h1>
