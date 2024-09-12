@@ -5,7 +5,7 @@ import { PrismicRichText } from '@prismicio/next'
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Blog({ blogpost, error }) {
+const Blog = ({ blogpost, error }) => {
   if (error) {
     return <main>
     <span className={styles.text}>Error</span>
@@ -71,3 +71,5 @@ export async function getServerSideProps({ params, previewData }) {
     }
   }
 }
+
+export default Blog;
