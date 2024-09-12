@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClient, repositoryName, linkResolver } from '@/prismicio'; // Adjust path as needed
 import { PrismicRichText } from '@prismicio/react';
 import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
+import PlausibleProvider from 'next-plausible'
 
 function App({ Component, pageProps }) {
   const [navigation, setNavigation] = useState(null);
@@ -51,7 +52,9 @@ function App({ Component, pageProps }) {
           </ul>
       </nav>
       <PrismicPreview repositoryName="imanma">
-        <Component {...pageProps} />
+        <PlausibleProvider domain="imanma.xyz">
+          <Component {...pageProps} />
+        </PlausibleProvider>
       </PrismicPreview>
     </>
   );
