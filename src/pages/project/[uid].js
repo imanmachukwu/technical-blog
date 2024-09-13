@@ -13,6 +13,8 @@ const Project = ({ project, error }) => {
     <span className={styles.text}>Refresh?</span>
   </main>;
   }
+
+
   return (
     <>
     <Head>
@@ -20,7 +22,7 @@ const Project = ({ project, error }) => {
         <meta name="description" content={project.data.meta_description || ''} />
         <meta property="og:title" content={project.data.meta_title || 'Project'} />
         <meta property="og:description" content={project.data.meta_description || ''} />
-        <meta property="og:image" content={project.data.meta_image?.url || ''} />
+        <meta property="og:image" content={project.data.meta_image.url || ''} />
         <meta property="og:image:width" content={project.data.meta_image_width || ''} />
         <meta property="og:image:height" content={project.data.meta_image_height || ''} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,15 +49,21 @@ const Project = ({ project, error }) => {
   )
 }
 
+export default Project;
+
+
 export async function getServerSideProps({ params, previewData }) {
+  const { uid } = params;
+  console.log("UID:", uid);
+
   try {
     const client = createClient({ previewData })
-    const project = await client.getByUID('project', params.uid)
+    const project = await client.getByUID('project', uid)
 
     if (!project) {
       return {
         props: {
-          error: error.message || 'Project not found'
+          error: 'Project not found'
         }
       }
     }
@@ -72,5 +80,3 @@ export async function getServerSideProps({ params, previewData }) {
     }
   }
 }
-
-export default Project;

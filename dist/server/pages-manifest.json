@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/colophon": "pages/colophon.js",
-  "/project/[uid]": "pages/project/[uid].js",
-  "/work": "pages/work.js"
+  "/work": "pages/work.js",
+  "/project/[uid]": "pages/project/[uid].js"
 }
