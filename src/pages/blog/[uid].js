@@ -1,7 +1,7 @@
 import { createClient } from '@/prismicio'
 import styles from '@/styles/Blog.module.css'
 //import { PrismicNextLink } from '@prismicio/next'
-import { PrismicRichText } from '@prismicio/next'
+import { PrismicRichText } from '@prismicio/react'
 import Head from 'next/head'
 import Link from 'next/link'
 
