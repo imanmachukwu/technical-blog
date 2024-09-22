@@ -89,10 +89,11 @@
     }
     
     .date {
-        grid-column: 4 / span 2;
+        grid-column: 5 / span 2;
         align-self: flex-end;
         justify-self: flex-end;
         font-size: var(--text_body-size);
+        white-space: nowrap
     }
     
     .title {
