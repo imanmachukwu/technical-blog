@@ -35,14 +35,14 @@ const Project = ({ project, error }) => {
       {project.data.title}
       </h1>
       <p className={styles.date}>
-      {new Date(project.data.last_publication_date).toLocaleDateString('en-US', {
+      {new Date(project.data.date).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
       </p>
       <div className={styles.content_container}>
-        <PrismicRichText field={project.data.text} />
+        <PrismicRichText field={project.data.documentation} />
       </div>
     </main>
     </>
@@ -59,6 +59,7 @@ export async function getServerSideProps({ params, previewData }) {
   try {
     const client = createClient({ previewData })
     const project = await client.getByUID('project', uid)
+    console.log(project.data)
 
     if (!project) {
       return {

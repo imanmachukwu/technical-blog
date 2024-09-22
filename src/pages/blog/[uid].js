@@ -32,14 +32,14 @@ const Blog = ({ blogpost, error }) => {
       {blogpost.data.title}
       </h1>
       <p className={styles.date}>
-      {new Date(blogpost.data.last_publication_date).toLocaleDateString('en-US', {
+      {new Date(blogpost.data.date).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
       </p>
       <div className={styles.content_container}>
-        <PrismicRichText field={blogpost.data.text} />
+        <PrismicRichText field={blogpost.data.documentation} />
       </div>
     </main>
     </>

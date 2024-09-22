@@ -65,6 +65,10 @@
   line-height: normal;
 }
 
+.content_container img {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   main:has(.text){
     display: flex;
@@ -85,7 +89,7 @@
     }
     
     .date {
-        grid-column: 6 / span 1;
+        grid-column: 6 / span 2;
         align-self: flex-end;
         justify-self: flex-end;
         font-size: var(--text_body-size);
