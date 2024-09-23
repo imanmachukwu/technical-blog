@@ -58,6 +58,7 @@ body {
 
 a {
   color: inherit;
+  cursor: pointer;
   text-decoration: none;
 }
 
@@ -106,6 +107,10 @@ nav li {
 
 nav li a p {
   font-size: var(--text_body-size);
+  cursor: pointer;
+}
+
+a p {
   cursor: pointer;
 }
 
