@@ -37,7 +37,7 @@
 }
 
 .date {
-  grid-column: 9 / span 1;
+  grid-column: 8 / span 2;
   align-self: flex-end;
   justify-self: flex-end;
   font-size: var(--text_body-size);

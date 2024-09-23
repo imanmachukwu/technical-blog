@@ -39,7 +39,7 @@ const Blog = ({ blogpost, error }) => {
             })}
       </p>
       <div className={styles.content_container}>
-        <PrismicRichText field={blogpost.data.documentation} />
+        <PrismicRichText field={blogpost.data.blog} />
       </div>
     </main>
     </>
