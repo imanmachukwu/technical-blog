@@ -126,6 +126,12 @@ main.main {
     z-index: 3;
 }
 
+.work:hover {
+  .work img {
+    opacity: 60%;
+  }
+}
+
 .work img {
   position: absolute;
   width: 100%;
