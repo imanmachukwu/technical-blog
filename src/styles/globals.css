@@ -62,11 +62,31 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6, a, p, div, nav, button {
+h1, a, p, div, nav, button {
   color: var(--text-colour);
   font-family: 'LT Remark', sans-serif;
   font-weight: 400;
   font-size: 3rem;                  
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.7rem;
+}
+
+h5 {
+  font-size: 1.4rem;
+}
+
+h6 {
+  font-size: 1.2rem;
 }
 
 ul {
