@@ -34,7 +34,7 @@ const Colophon = ({ page, error }) => {
   )
 }
 
-export async function getStaticProps({ previewData }) {
+export async function getServerSideProps({ previewData }) {
   try {
     const client = createClient({ previewData });
     const page = await client.getSingle('colophon');
