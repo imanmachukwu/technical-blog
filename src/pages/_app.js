@@ -2,9 +2,10 @@ import "@/styles/globals.css";
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { createClient, repositoryName, linkResolver } from '@/prismicio'; // Adjust path as needed
-import { PrismicRichText } from '@prismicio/react';
+import { PrismicRichText, JSXMapSerializer } from '@prismicio/react';
 import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
 import PlausibleProvider from 'next-plausible'
+
 
 function App({ Component, pageProps }) {
   const [navigation, setNavigation] = useState(null);
@@ -31,7 +32,7 @@ function App({ Component, pageProps }) {
   if (error) {
     return (
       <nav>
-        <p>Error fetching content. Please refetch.</p>
+        <p>Error fetching menu. Please refetch.</p>
       </nav>
     )
   }

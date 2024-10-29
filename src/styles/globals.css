@@ -143,10 +143,18 @@ nav li {
 nav li a p {
   font-size: var(--text_body-size);
   cursor: pointer;
+  text-decoration: none;
 }
 
 a p {
   cursor: pointer;
+}
+
+p > a {
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 3rem;
+  text-decoration: underline;
 }
 
 nav > p {
