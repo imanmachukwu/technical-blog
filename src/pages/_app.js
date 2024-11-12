@@ -5,6 +5,7 @@ import { createClient, repositoryName, linkResolver } from '@/prismicio'; // Adj
 import { PrismicRichText, JSXMapSerializer } from '@prismicio/react';
 import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
 import PlausibleProvider from 'next-plausible'
+import { Analytics } from '@vercel/analytics/react';
 
 
 function App({ Component, pageProps }) {
@@ -55,6 +56,7 @@ function App({ Component, pageProps }) {
       <PrismicPreview repositoryName="imanma">
         <PlausibleProvider domain="imanma.xyz">
           <Component {...pageProps} />
+          <Analytics />
         </PlausibleProvider>
       </PrismicPreview>
     </>
