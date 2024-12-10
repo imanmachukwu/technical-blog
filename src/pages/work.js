@@ -49,7 +49,7 @@ const WorkItem = ({ work, client }) => {
   switch (linkedData.type) {
     case 'blogpost':
       return (
-        <div className={styles.work} style={{ '--aspect-ratio': 1 / 1}}>
+        <PrismicNextLink field={work?.link} className={styles.work} style={{ '--aspect-ratio': 1 / 1}}>
           <p className={styles.meta_text}>
             {new Date(work?.link?.last_publication_date).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -63,11 +63,11 @@ const WorkItem = ({ work, client }) => {
             </svg>
           </PrismicNextLink>
           <h1 className={styles.work_title}>{linkedData.data.title}</h1>
-        </div>
+        </PrismicNextLink>
       );
     case 'project':
       return (
-        <div className={styles.work} style={{ '--aspect-ratio': 1 / 1, backgroundColor: '#000000'  }}>
+        <PrismicNextLink field={work?.link} className={styles.work} style={{ '--aspect-ratio': 1 / 1, backgroundColor: '#000000'  }}>
           <p className={styles.meta_text} style={{color: 'white'}}>Project</p>
           <PrismicNextLink field={work?.link}>
             <svg width="36" height="13" viewBox="0 0 36 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@ const WorkItem = ({ work, client }) => {
           </PrismicNextLink>
           {linkedData.data.featured_image && <img src={linkedData.data.featured_image.url} alt={linkedData.data.title} />}
           <h1 className={styles.work_title} style={{color: 'white'}}>{linkedData.data.title}</h1>
-        </div>
+        </PrismicNextLink>
       );
     case 'post':
       return (

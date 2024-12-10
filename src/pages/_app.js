@@ -1,12 +1,10 @@
 import "@/styles/globals.css";
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { createClient, repositoryName, linkResolver } from '@/prismicio'; // Adjust path as needed
+import { linkResolver } from '@/prismicio';
 import { PrismicRichText, JSXMapSerializer } from '@prismicio/react';
 import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
-import PlausibleProvider from 'next-plausible'
 import { Analytics } from '@vercel/analytics/react';
-
 
 function App({ Component, pageProps }) {
   const [navigation, setNavigation] = useState(null);
@@ -54,10 +52,8 @@ function App({ Component, pageProps }) {
           </ul>
       </nav>
       <PrismicPreview repositoryName="imanma">
-        <PlausibleProvider domain="imanma.xyz">
           <Component {...pageProps} />
           <Analytics />
-        </PlausibleProvider>
       </PrismicPreview>
     </>
   );
