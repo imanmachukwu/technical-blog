@@ -58,6 +58,10 @@ main.main {
     aspect-ratio: var(--aspect-ratio);
 }
 
+a.work {
+  cursor: pointer;
+}
+
 .work_loading {
   position: relative;
     grid-column: span 4;
