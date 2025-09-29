@@ -1,10 +1,10 @@
-import "@/styles/globals.css";
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 import { linkResolver } from '@/prismicio';
-import { PrismicRichText, JSXMapSerializer } from '@prismicio/react';
+import "@/styles/globals.css";
 import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
+import { PrismicRichText } from '@prismicio/react';
 import { Analytics } from '@vercel/analytics/react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 function App({ Component, pageProps }) {
   const [navigation, setNavigation] = useState(null);
@@ -15,10 +15,11 @@ function App({ Component, pageProps }) {
     const fetchNavigation = async () => {
       try {
         const response = await fetch('/api/navigation'); // Call the API route
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         const data = await response.json();
+        if (!response.ok) {
+          console.error(data.error)
+          throw new Error(data.error || 'Network response was not ok');
+        }
         setNavigation(data);
       } catch (error) {
         setError(error.message);
