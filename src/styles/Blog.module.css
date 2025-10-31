@@ -41,6 +41,8 @@ main:has(.content_container){
   font-size: var(--text_body-size);
   color: whitesmoke;
   cursor: pointer;
+  transform: rotate(180deg);
+  justify-self: flex-start;
 }
 
 .date {
@@ -68,7 +70,7 @@ main:has(.content_container){
   height: fit-content;
 }
 
-.content_container h6 {
+.content_container :is(p, h1, h2, h3, h4, h5, h6, a, strong, em, ul, ol, li, blockquote, pre, code, span) {
     color: whitesmoke;
 }
 

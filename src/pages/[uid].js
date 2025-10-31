@@ -28,7 +28,7 @@ const Blog = ({ blogpost, error }) => {
     </Head>
     <main>
       <Link href="/" className={styles.back_button} prefetch>
-        <svg width="36" height="13" viewBox="0 0 36 13" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
+        <svg width="36" height="13" viewBox="0 0 36 13" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 6.5H34.5M34.5 6.5L29 1M34.5 6.5L29 12" stroke="#f5f5f5" strokeWidth="1.5" />
         </svg>
       </Link>
