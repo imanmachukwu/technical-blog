@@ -45,7 +45,7 @@ const Post = ({ work, client }) => {
   }
 
   //console.log("here is the linked data:", linkedData)
-  console.log(work)
+  //console.log(work)
 
   return (
     <>
