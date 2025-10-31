@@ -1,7 +1,5 @@
-import { linkResolver } from '@/prismicio';
 import "@/styles/globals.css";
-import { PrismicNextLink, PrismicPreview } from '@prismicio/next';
-import { PrismicRichText } from '@prismicio/react';
+import { PrismicPreview } from '@prismicio/next';
 import { Analytics } from '@vercel/analytics/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -39,7 +37,7 @@ function App({ Component, pageProps }) {
 
   return (
     <>
-      <nav>
+      {/* <nav>
           <ul>
             {navigation?.data?.slices?.map((slice, index) => (
               <li key={index}>
@@ -51,7 +49,7 @@ function App({ Component, pageProps }) {
               </li>
             ))}
           </ul>
-      </nav>
+      </nav>*/}
       <PrismicPreview repositoryName="imanma">
           <Component {...pageProps} />
           <Analytics />

@@ -1,16 +1,4 @@
-@font-face {
-  font-family: "LT Remark";
-  src: url("../../public/font/LTRemark/LTRemark-Regular.otf");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "LT Remark";
-  src: url("../../public/font/LTRemark/LTRemark-Italic.otf");
-  font-weight: 400;
-  font-style: italic;
-}
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 :root {
   --max-width: 1920px;
@@ -23,8 +11,8 @@
   --mobile_title-size: 2.5rem;
   --mobile_body-size: 0.875rem;
 
-  --background-colour: #bfe7f8;
-  --text-colour: #0d3044;
+  --background-colour: #212529;
+  --text-colour: #030605;
   --off-white: rgba(255, 255, 255, 0.70);
 
   --shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
@@ -64,42 +52,46 @@ a {
 
 h1, a, p, div, nav, button {
   color: var(--text-colour);
-  font-family: 'LT Remark', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-weight: 400;
-  font-size: 3rem;                  
+  font-size: 3rem;
+}
+
+h1 {
+    letter-spacing: -1px;
 }
 
 h2 {
   color: var(--text-colour);
-  font-family: 'LT Remark', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-weight: 400;
   font-size: 2.4rem;
 }
 
 h3 {
   color: var(--text-colour);
-  font-family: 'LT Remark', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-weight: 400;
   font-size: 2rem;
 }
 
 h4 {
   color: var(--text-colour);
-  font-family: 'LT Remark', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-weight: 400;
   font-size: 1.7rem;
 }
 
 h5 {
   color: var(--text-colour);
-  font-family: 'LT Remark', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-weight: 400;
   font-size: 1.4rem;
 }
 
 h6 {
   color: var(--text-colour);
-  font-family: 'LT Remark', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-weight: 400;
   font-size: 1.2rem;
 }
@@ -184,9 +176,9 @@ main {
     --text_title-size: 2.5rem;
     --text_body-size: 0.875rem;
   }
-  h1, h2, h3, h4, h5, h6, a, p, div, nav, button {
+  /*h1, h2, h3, h4, h5, h6, a, p, div, nav, button {
     font-size: var(--text_title-size);
-  }
+  }*/
   main {
     grid-template-columns: repeat(6, 1fr);
   }

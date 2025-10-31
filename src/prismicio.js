@@ -1,7 +1,6 @@
 import * as prismic from "@prismicio/client";
-import { enableAutoPreviews } from '@prismicio/next'
-import config from "../slicemachine.config.json";
-import fetch from 'cross-fetch'
+import { enableAutoPreviews } from '@prismicio/next';
+import fetch from 'cross-fetch';
 
 
 export const repositoryName =
@@ -21,20 +20,12 @@ const routes = [
     path: '/',
   },
   {
-    type: 'colophon',
-    path: '/colophon',
-  },
-  {
     type: 'work',
     path: '/work',
   },
   {
-    type: 'project',
-    path: '/project/:uid',
-  },
-  {
     type: 'blogpost',
-    path: '/blog/:uid',
+    path: '/:uid',
   },
 ];
 
@@ -90,14 +81,10 @@ export function linkResolver(doc) {
   switch (doc.type) {
       case 'Index':
           return '/'
-      case 'colophon':
-          return '/colophon'
       case 'work':
           return '/work'
-      case 'project':
-          return `/project/${doc.uid}`
       case 'blog':
-          return `/blog/${doc.uid}`
+          return `/${doc.uid}`
       default:
           return '/'
   }

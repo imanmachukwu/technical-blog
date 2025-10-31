@@ -1,51 +1,119 @@
-import Head from "next/head";
+import { createClient } from '@/prismicio';
 import styles from "@/styles/Home.module.css";
-import { createClient } from '@/prismicio'
-import { useEffect } from "react";
+import { PrismicNextLink } from "@prismicio/next";
+import Head from "next/head";
+import { useEffect, useState } from 'react';
 
-const Home = ({ page, error}) => {
+const useLinkedDocument = (client, link) => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (link.type && link.uid) {
+        try {
+          const response = await fetch(`/api/work_api?type=${link.type}&uid=${link.uid}`);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const data = await response.json();
+          setData(data);
+        } catch (error) {
+          setError(error.message);
+        }
+      }
+    };
+
+    fetchData();
+  }, [client, link]);
+
+  return { data, error };
+};
+
+const Post = ({ work, client }) => {
+  const { data: linkedData, error } = useLinkedDocument(client, work?.link);
+
   if (error) {
-    return <main>
-    <span className={styles.text}>Error</span>
-    <span className={styles.text}>Error</span>
-    <span className={styles.text}>Refresh?</span>
-  </main>;
+    return <div className={styles.work_error} style={{ '--aspect-ratio': 1 / 1 }}>
+      <p>Error fetching item.</p>
+      <p>Please retry</p>
+    </div>;
+  }
+
+  if (!linkedData || linkedData.type !== 'blogpost') {
+    return null;
+  }
+
+  //console.log("here is the linked data:", linkedData)
+  console.log(work)
+
+  return (
+    <>
+      <PrismicNextLink field={work?.link} className={styles.work} style={{ '--aspect-ratio': 1 / 1}}>
+        <p className={styles.meta_text}>
+          {new Date(work?.link?.last_publication_date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </p>
+        <svg width="36" height="13" viewBox="0 0 36 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 6.5H34.5M34.5 6.5L29 1M34.5 6.5L29 12" stroke="#0D3044" strokeWidth="1.5" />
+        </svg>
+        <h1 className={styles.work_title}>{linkedData.data.title}</h1>
+      </PrismicNextLink>
+    </>
+  );
+}
+
+const Home = ({ linkedData, error }) => {
+  const client = createClient();
+
+  if (error) {
+    return (
+      <main>
+        <span className={styles.text}>Error</span>
+        <span className={styles.text}>Error</span>
+        <span className={styles.text}>Refresh?</span>
+      </main>
+    );
   }
 
   return (
     <>
       <Head>
-        <title>{page?.data?.meta_title || 'Portfolio'}</title>
-        <meta name="description" content={page?.data?.meta_description || ''} />
-        <meta property="og:title" content={page?.data?.meta_title || 'Portfolio'} />
-        <meta property="og:description" content={page?.data?.meta_description || ''} />
-        <meta property="og:image" content={page?.data?.meta_image?.url || ''} />
-        <meta property="og:image:width" content={page?.data?.meta_image_width || ''} />
-        <meta property="og:image:height" content={page?.data?.meta_image_height || ''} />
+        <title>{linkedData?.data?.meta_title || 'Work'}</title>
+        <meta name="description" content={linkedData?.data?.meta_description || ''} />
+        <meta property="og:title" content={linkedData?.data?.meta_title || ''} />
+        <meta property="og:description" content={linkedData?.data?.meta_description || ''} />
+        <meta property="og:image" content={linkedData?.data?.meta_image?.url || ''} />
+        <meta property="og:image:width" content={linkedData?.data?.meta_image_width || ''} />
+        <meta property="og:image:height" content={linkedData?.data?.meta_image_height || ''} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-          <span className={styles.normal_title}>{page?.data?.title_normal}</span>
-          <span className={styles.italic_title}>{page?.data?.title_italics}</span>
+      <main className={styles.main}>
+        {linkedData?.data?.works?.map((work, index) => (
+          <Post key={index} work={work} client={client} />
+        ))}
       </main>
     </>
   );
-}
+};
 
-export async function getStaticProps({ previewData }) {
+export async function getServerSideProps({ previewData }) {
   try {
-    const client = createClient({ previewData })
-    const page = await client.getSingle('Index');
-    //console.log("Page from Index:", page)
+    const client = createClient({ previewData });
+    const linkedData = await client.getSingle('work');
+    //console.log("linkedData is:", linkedData.data.works);
     return {
-      props: { page }
-    }
+      props: { linkedData },
+    };
   } catch (error) {
-    //console.error('Error fetching Index page from Prismic:', error);
+    console.error('Error fetching data from Prismic:', error);
     return {
-      props: { error: error.message },
-    }
+      props: { error: error.message || 'An error occurred while fetching data' },
+    };
   }
 }
 
