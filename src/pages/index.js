@@ -110,12 +110,12 @@ export async function getServerSideProps({ previewData }) {
     const client = createClient();
     const linkedData = await client.getAllByType("blogpost", {
       orderings: {
-        field: 'document.first_publication_date',
-        direction: 'desc'
-      }
+              field: 'document.first_publication_date',
+              direction: 'desc'
+            }
     });
 
-    console.log(linkedData)
+    //console.log(linkedData)
 
     return {
       props: { linkedData },

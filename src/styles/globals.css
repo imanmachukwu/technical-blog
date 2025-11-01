@@ -169,6 +169,35 @@ main {
   gap: var(--spacing);
 }
 
+
+
+
+.wall {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wall form {
+    display: flex;
+    gap: 2rem;
+}
+
+.wall input {
+    padding: 1rem;
+}
+
+.wall form :is(input, button, p) {
+    font-size: var(--text_body-size);
+}
+
+
+
+
+
+
+
 @media (max-width: 768px) {
   :root {
     --grid-spacing: 1rem;
