@@ -2,68 +2,6 @@ import { createClient } from '@/prismicio';
 import styles from "@/styles/Home.module.css";
 import { PrismicNextLink } from "@prismicio/next";
 import Head from "next/head";
-//import { useEffect, useState } from 'react';
-
-// const useLinkedDocument = (client, link) => {
-//   const [data, setData] = useState(null);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     console.log("Link is"link)
-
-//     const fetchData = async () => {
-//       if (link.type && link.uid) {
-//         try {
-//           const response = await fetch(`/api/work_api?type=${link.type}&uid=${link.uid}`);
-//           if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//           }
-//           const data = await response.json();
-//           setData(data);
-//         } catch (error) {
-//           setError(error.message);
-//         }
-//       }
-//     };
-
-//     fetchData();
-//   }, [client, link]);
-
-//   return { data, error };
-// };
-
-// const Post = ({ work, client }) => {
-//   const { data: linkedData, error } = useLinkedDocument(client, work?.link);
-
-//   if (error) {
-//     return <div className={styles.work_error} style={{ '--aspect-ratio': 1 / 1 }}>
-//       <p>Error fetching item.</p>
-//       <p>Please retry</p>
-//     </div>;
-//   }
-
-//   if (!linkedData || linkedData.type !== 'blogpost') {
-//     return null;
-//   }
-
-//   return (
-//     <>
-//       <PrismicNextLink field={work?.link} className={styles.work} style={{ '--aspect-ratio': 1 / 1}}>
-//         <p className={styles.meta_text}>
-//           {new Date(work?.link?.last_publication_date).toLocaleDateString('en-US', {
-//             year: 'numeric',
-//             month: 'long',
-//             day: 'numeric',
-//           })}
-//         </p>
-//         <svg width="36" height="13" viewBox="0 0 36 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-//           <path d="M0 6.5H34.5M34.5 6.5L29 1M34.5 6.5L29 12" stroke="#0D3044" strokeWidth="1.5" />
-//         </svg>
-//         <h1 className={styles.work_title}>{linkedData.data.title}</h1>
-//       </PrismicNextLink>
-//     </>
-//   );
-// }
 
 const Home = ({ linkedData, error }) => {
   if (error) {
@@ -108,7 +46,7 @@ export async function getServerSideProps({ previewData }) {
   console.log({previewData})
   try {
     const client = createClient();
-    const linkedData = await client.getAllByType("blogpost", {
+    const linkedData = await client.getAllByType("technicalpost", {
       orderings: {
               field: 'document.first_publication_date',
               direction: 'desc'

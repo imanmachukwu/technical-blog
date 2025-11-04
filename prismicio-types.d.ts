@@ -640,6 +640,104 @@ export type ProjectDocument<Lang extends string = string> =
     Lang
   >;
 
+type TechnicalpostDocumentDataSlicesSlice = never;
+
+/**
+ * Content for technicalpost documents
+ */
+interface TechnicalpostDocumentData {
+  /**
+   * title field in *technicalpost*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: technicalpost.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * date field in *technicalpost*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: technicalpost.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date: prismic.DateField;
+
+  /**
+   * blog field in *technicalpost*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: technicalpost.blog
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  blog: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *technicalpost*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: technicalpost.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<TechnicalpostDocumentDataSlicesSlice> /**
+   * Meta Title field in *technicalpost*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: technicalpost.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *technicalpost*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: technicalpost.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *technicalpost*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: technicalpost.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * technicalpost document from Prismic
+ *
+ * - **API ID**: `technicalpost`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TechnicalpostDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TechnicalpostDocumentData>,
+    "technicalpost",
+    Lang
+  >;
+
 /**
  * Item in *work → works*
  */
@@ -757,6 +855,7 @@ export type AllDocumentTypes =
   | PostDocument
   | PreloaderDocument
   | ProjectDocument
+  | TechnicalpostDocument
   | WorkDocument;
 
 /**
@@ -843,6 +942,9 @@ declare module "@prismicio/client" {
       ProjectDocument,
       ProjectDocumentData,
       ProjectDocumentDataSlicesSlice,
+      TechnicalpostDocument,
+      TechnicalpostDocumentData,
+      TechnicalpostDocumentDataSlicesSlice,
       WorkDocument,
       WorkDocumentData,
       WorkDocumentDataWorksItem,
