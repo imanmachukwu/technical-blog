@@ -43,7 +43,30 @@ const Blog = ({ technicalpost, error }) => {
         })}
       </p>
       <div className={styles.content_container}>
-        <PrismicRichText field={technicalpost.data.blog} />
+        <PrismicRichText
+          field={technicalpost.data.blog}
+          components={{
+              image: ({ node }) => {
+                const url = node.url.endsWith('.gif') ? node.url + '?auto=null' : node.url;
+                return <img src={url} alt={node.alt || ''} />;
+              },
+              embed: ({ node }) => {
+                if (node.oembed.type === 'video') {
+                  return (
+                    <video
+                      src={node.oembed.embed_url}
+                      muted
+                      autoPlay
+                      playsInline
+                      loop
+                      style={{ width: '100%' }}
+                    />
+                  );
+                }
+                return <div dangerouslySetInnerHTML={{ __html: node.oembed.html }} />;
+              }
+            }}
+        />
       </div>
     </main>
     </>
