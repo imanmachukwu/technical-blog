@@ -4,14 +4,14 @@ export default function generateSiteMap(pages) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <url>
-       <loc>https://imanma.xyz</loc>
+       <loc>https://technical.imanmachukwu.com</loc>
        <lastmod>${new Date().toISOString()}</lastmod>
        <changefreq>monthly</changefreq>
        <priority>1.0</priority>
      </url>
      ${pages.map(page => `
        <url>
-         <loc>https://imanma.xyz/${page.uid}</loc>
+         <loc>https://technical.imanmachukwu.com/${page.uid}</loc>
          <lastmod>${page.last_publication_date}</lastmod>
          <changefreq>weekly</changefreq>
          <priority>0.7</priority>
@@ -23,7 +23,7 @@ export default function generateSiteMap(pages) {
 
 export async function getServerSideProps({ res }) {
   const client = createClient();
-  const pages = await client.getAllByType('page'); 
+  const pages = await client.getAllByType('page');
 
   const sitemap = generateSiteMap(pages);
 
@@ -32,6 +32,6 @@ export async function getServerSideProps({ res }) {
   res.end();
 
   return {
-    props: {}, 
+    props: {},
   };
 }
