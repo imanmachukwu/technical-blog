@@ -74,6 +74,12 @@ main:has(.content_container){
     color: whitesmoke;
 }
 
+.content_container :is(img, video, figure, iframe) {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
 .content_container p, .content_container p * {
   font-size: var(--text_body-size);
   font-style: normal;

@@ -17,7 +17,7 @@ const Home = ({ linkedData, error }) => {
   return (
     <>
       <Head>
-        <title>My private blog</title>
+        <title>My technical blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -53,7 +53,7 @@ export async function getServerSideProps({ previewData }) {
             }
     });
 
-    //console.log(linkedData)
+    console.log(linkedData)
 
     return {
       props: { linkedData },

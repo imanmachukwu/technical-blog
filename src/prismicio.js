@@ -20,7 +20,7 @@ const routes = [
     path: '/',
   },
   {
-    type: 'blogpost',
+    type: 'technicalpost',
     path: '/:uid',
   },
 ];
@@ -77,7 +77,7 @@ export function linkResolver(doc) {
   switch (doc.type) {
       case 'Index':
           return '/'
-      case 'blogpost':
+      case 'technicalpost':
           return `/${doc.uid}`
       default:
           return '/'
